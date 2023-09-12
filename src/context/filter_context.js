@@ -41,8 +41,9 @@ export const FilterProvider = ({ children }) => {
   }, [products]);
 
   useEffect(() => {
+    dispatch({ type: FILTER_PRODUCTS });
     dispatch({ type: SORT_PRODUCTS });
-  }, [products, state.sort]);
+  }, [products, state.sort, state.filters]);
 
   const setGridView = () => {
     dispatch({ type: SET_GRIDVIEW });
@@ -60,6 +61,21 @@ export const FilterProvider = ({ children }) => {
   const updateFilters = (e) => {
     let name = e.target.name;
     let value = e.target.value;
+
+    // for button components, there are no values
+    if (name === "category") {
+      value = e.target.textContent;
+    }
+
+    // if name is color, it requires accessing to the defined prop
+    // cat corresponds to "data-cat" prop in the button of the colors component
+    if (name === "color") {
+      value = e.target.dataset.cat;
+    }
+
+    if (name === "price") {
+      value = Number(value);
+    }
 
     // if there are multiple variables to pass in the payload, it will be passed as an object
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
