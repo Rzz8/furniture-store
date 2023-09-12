@@ -59,6 +59,12 @@ const filter_reducer = (state, action) => {
     return { ...state, filtered_products: temp_products };
   }
 
+  // dynamic property [name] is used to update the filters!
+  if (action.type === UPDATE_FILTERS) {
+    const { name, value } = action.payload;
+    return { ...state, filters: { ...state.filters, [name]: value } };
+  }
+
   throw new Error(`No Matching "${action.type}" - action type`);
 };
 
