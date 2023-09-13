@@ -73,15 +73,22 @@ export const FilterProvider = ({ children }) => {
       value = e.target.dataset.cat;
     }
 
+    // the value from range input is a string, so need to convert it
     if (name === "price") {
       value = Number(value);
+    }
+
+    if (name === "shipping") {
+      value = e.target.checked;
     }
 
     // if there are multiple variables to pass in the payload, it will be passed as an object
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };
 
-  const clearFilters = () => {};
+  const clearFilters = () => {
+    dispatch({ type: CLEAR_FILTERS });
+  };
 
   return (
     <FilterContext.Provider
