@@ -50,7 +50,7 @@ const SingleProductPage = () => {
     stock,
     stars,
     reviews,
-    id: sku,
+    id: sku,  //id is the original property in database
     company,
     images,
   } = product;
