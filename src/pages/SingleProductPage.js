@@ -26,6 +26,7 @@ const SingleProductPage = () => {
 
   useEffect(() => {
     fetchSingleProduct(`${url}${id}`);
+    // eslint-disable-next-line
   }, [id]);
 
   // need to add error as dependency otherwise it wont run again to redirect to home page
@@ -33,6 +34,7 @@ const SingleProductPage = () => {
     if (error) {
       setTimeout(() => history.push("/"), 3000);
     }
+    // eslint-disable-next-line
   }, [error]);
 
   if (loading) {
@@ -50,7 +52,7 @@ const SingleProductPage = () => {
     stock,
     stars,
     reviews,
-    id: sku,  //id is the original property in database
+    id: sku, //id is the original property in database
     company,
     images,
   } = product;
